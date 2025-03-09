@@ -1,0 +1,353 @@
+body {
+    background: #f3f7ff;
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    /*overflow-x: hidden;  Prevent horizontal scroll */
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+
+/* MAIN CONTENT */
+/* Content */
+
+
+
+.content {
+    margin-left: 10px;
+    background: #f3f7ff;
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    padding: 20px;
+}
+
+
+
+.content::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+
+/* Profile container */
+.profile {
+    margin-top: 7px;
+}
+
+/* Profile image styling */
+.profile-size {
+    width: 130px; /* Larger size */
+    height: 130px; /* Larger size */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffffff; /* Thicker border for better visibility */
+    display: inline-block; /* Ensures proper centering */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #000000;
+}
+
+.empDetails{
+    font-size: 17px;
+    font-weight: Normal;
+    color: #333;
+    margin-top: 10px;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow: hidden;
+
+}
+
+.empDetails::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.empName{
+    font-size: 24px;
+    color: #000000;
+    font-weight: bold;
+}
+
+
+
+.employee-details{
+    font-weight: bold;
+    background: hsl(95, 91%, 40%);
+    color: #f3f7ff;
+    border-radius: 10px;
+    height: 40px;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    margin-top: 3px;
+    width: 190px;
+}
+
+.employee-details:hover{
+    background: hsl(95, 91%, 40%);
+    color: white;
+    cursor: pointer;
+    transform: scale(1.05);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.employee-modal{
+    font-weight: normal;
+    background: hsl(198, 100%, 50%);
+    color: #f3f7ff;
+    border-radius: 5px;
+    height: 25px;
+    text-align: center;
+    padding: 3px;
+    border: none;
+    margin-top: 3px;
+    width: 100px;
+}
+
+.employee-modal:hover{
+    background: hsl(202, 100%, 50%);
+    color: white;
+    cursor: pointer;
+    transform: scale(1.05);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.modal-body{
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+.modal-body::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+
+.btn{
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+
+/* Titles */
+.page-title {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+
+
+/* Search Box */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f8f9fc;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+.search-box i {
+    color: #6a5acd;
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+}
+
+.search-box input::placeholder {
+    color: #a0a0a0;
+}
+
+/* Stock Button */
+.stock-btn {
+    background: #0d6efd;
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+}
+
+.stock-btn:hover {
+    background: #0d6efd;
+    color: rgb(255, 255, 255);
+    transform: scale(1.05); /* Slightly increases the button size */
+}
+
+
+/* TABLE */
+
+.filter-dropdown {
+    align-items: center;
+    font-size: 16px;
+    font-weight: normal;
+    cursor: pointer;
+    border: none;
+    background: #f8f9fc;
+    color: #604be8;
+
+}
+
+.filter-dropdown i {
+    font-size: 14px; 
+}
+
+.filter-dropdown:hover {
+    background-color: #b8b8b8;
+    border: none;
+}
+
+.table-responsive {
+
+    overflow-x: auto;
+}
+
+.table-header th{
+    background: #06d7a0;
+    padding: 10px;
+    margin-top: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+
+}
+
+.table-body tr {
+    padding: 8px;
+    color: black;
+    font-weight: normal;
+    text-align: center; 
+    vertical-align: middle; 
+    outline: none !important;
+    
+}
+
+.table, .table tbody, .table td {
+    background: #f3f7ff !important;
+
+}
+
+.btn-table {
+    display: flex; 
+    gap: 10px; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit:hover, .btn-delete:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05); /* Slightly increases the button size */
+
+}
+
+.input-group {
+    width: 310px;
+    height: 30px; /* Adjust height as needed */
+    vertical-align: middle;
+}
+
+.sort-date {
+    width: 160px;
+    height: 30px; /* Match height */
+    vertical-align: middle;
+}
+
+.input-group-text {
+    height: 30px; /* Match height */
+    display: flex;
+    align-items: center;
+}
+
+.btn-primary {
+    height: 30px; /* Match height */
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.sort-date::placeholder {
+    font-size: 14px;
+    color: #999; 
+    font-style: normal; 
+}
+
+
+.pagination-container .pagination .page-item .page-link {
+    width: 90px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10%;
+    border: none;
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Smooth transition */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.pagination-container .pagination .page-item .page-link:hover {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+
+
+
+
+/* switch */
+.custom-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-check-input {
+    width: 3rem !important; 
+    height: 1.5rem !important; 
+    background-color: #c3cde3 !important; 
+    border: none !important;  
+    box-shadow: none !important; 
+    outline: none !important;
+    transition: background-color 0.3s ease; 
+}
+
+.form-check-input:checked {
+    background-color: #604be8 !important;
+    border: none !important; 
+    box-shadow: none !important; 
+    outline: none !important; 
+}
+
+.form-check-input:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}

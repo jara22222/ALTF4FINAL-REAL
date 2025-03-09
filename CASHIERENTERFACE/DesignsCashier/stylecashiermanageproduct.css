@@ -1,0 +1,355 @@
+body {
+    background: #f3f7ff;
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    /*overflow-x: hidden;  Prevent horizontal scroll */
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Navbar */
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+    margin-left: 80px;
+}
+
+.nav-tabs .nav-link {
+    color: #6c757d; 
+    font-size: 16px; 
+    font-weight: bold; 
+    padding: 4px 12px; 
+    height: 30px; 
+    line-height: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #22c55e; 
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 30px; 
+}
+
+.nav-tabs .nav-link:hover {
+    color: #ffffff; 
+    background-color: #22c55e; 
+}
+
+
+/* Sidebar */
+.sidebar {
+    background: #ffffff;
+    height: 100vh;
+    width: 80px;
+    position: fixed;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #000000;
+    margin-top: 10px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 5px;
+}
+
+.manageProduct, .transactionHistory, .orderList {
+    margin-bottom: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.manageProduct i, 
+.transactionHistory i,
+a.orderList i {
+    color: #000000;
+    font-size: 30px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.manageProduct:hover, .transactionHistory:hover, .orderList:hover{
+    transform: scale(1.05);
+}
+
+
+.manageProduct i:hover, 
+.transactionHistory i:hover,
+a.orderList i:hover {
+    text-shadow: solid 3px 3px 8px rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
+
+}
+
+/* MAIN CONTENT */
+/* Content */
+
+.main-content {
+    flex-grow: 1; /* Take remaining space */
+    overflow: visible !important; /* Allows dropdown to be visible */
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+.content {
+    margin-left: 80px;
+    background: #f3f7ff;
+    flex-grow: 1; /* Ensures content expands within the available space */
+}
+
+
+.employee-details h5{
+    font-weight: bold;
+}
+
+
+
+
+/* Titles */
+.menu-title {
+    font-size: 34px;
+    font-weight: bold;
+}
+
+
+
+/* Search Box */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f8f9fc;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+.search-box i {
+    color: #6a5acd;
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+}
+
+.search-box input::placeholder {
+    color: #a0a0a0;
+}
+
+/* Stock Button */
+.stock-btn {
+    background: #0d6efd;
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+}
+
+.stock-btn:hover {
+    background: #0d6efd;
+    color: rgb(255, 255, 255);
+    transform: scale(1.05); /* Slightly increases the button size */
+}
+
+
+/* TABLE */
+
+.filter-dropdown {
+    align-items: center;
+    font-size: 16px;
+    font-weight: normal;
+    cursor: pointer;
+    border: none;
+    background: #f8f9fc;
+    color: #604be8;
+
+}
+
+.filter-dropdown i {
+    font-size: 14px; 
+}
+
+.filter-dropdown:hover {
+    background-color: #b8b8b8;
+    border: none;
+}
+
+.table-responsive {
+    height: 100vh; /* Adjust the height as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    border: 1px solid #ddd; /* Optional: Adds a border to define the table area */
+    margin-left: 80px;
+    border: none;
+}
+
+/* Custom scrollbar styling */
+.table-responsive::-webkit-scrollbar {
+    width: 8px; /* Scrollbar width */
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #b8b8b8; /* Scrollbar color */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #888; /* Darker on hover */
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background track color */
+}
+
+
+.dropdown-menu {
+    z-index: 1100 !important; /* Ensure it's above other elements */
+    background-color: white;
+}
+
+
+
+
+
+
+.table-header th{
+    background: #06d7a0;
+    padding: 10px;
+    margin-top: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+
+}
+.table-body tr {
+    padding: 8px;
+    color: black;
+    font-weight: normal;
+    text-align: center; 
+    vertical-align: middle; 
+    outline: none !important;
+}
+
+.table, .table tbody, .table tr, .table td {
+    border: none !important;
+    background: #f3f7ff !important;
+
+}
+
+.btn-table {
+    display: flex; 
+    gap: 10px; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit:hover, .btn-delete:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05); /* Slightly increases the button size */
+
+}
+
+.input-group {
+    width: 310px;
+    height: 30px; /* Adjust height as needed */
+    vertical-align: middle;
+}
+
+.sort-date {
+    width: 160px;
+    height: 30px; /* Match height */
+    vertical-align: middle;
+}
+
+.input-group-text {
+    height: 30px; /* Match height */
+    display: flex;
+    align-items: center;
+}
+
+.btn-primary {
+    height: 30px; /* Match height */
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.sort-date::placeholder {
+    font-size: 14px;
+    color: #999; 
+    font-style: normal; 
+}
+
+
+
+
+
+/* switch */
+.custom-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-check-input {
+    width: 3rem !important; 
+    height: 1.5rem !important; 
+    background-color: #c3cde3 !important; 
+    border: none !important;  
+    box-shadow: none !important; 
+    outline: none !important;
+    transition: background-color 0.3s ease; 
+}
+
+.form-check-input:checked {
+    background-color: #604be8 !important;
+    border: none !important; 
+    box-shadow: none !important; 
+    outline: none !important; 
+}
+
+.form-check-input:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}

@@ -1,0 +1,456 @@
+body {
+    background: #f3f7ff;
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    /*overflow-x: hidden;  Prevent horizontal scroll */
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* Sidebar */
+.sidebar {
+    background: #ffffff;
+    height: 100vh;
+    width: 80px;
+    position: fixed;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #000000;
+    margin-top: 10px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 5px;
+}
+
+
+.manageProduct, .transactionHistory, .orderList {
+    margin-bottom: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.manageProduct i, 
+.transactionHistory i,
+.orderList i {
+    color: #000000;
+    font-size: 30px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.manageProduct:hover, .transactionHistory:hover, .orderList:hover{
+    transform: scale(1.05);
+}
+
+
+.manageProduct i:hover, 
+.transactionHistory i:hover,
+.orderList i:hover {
+    text-shadow: solid 3px 3px 8px rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
+
+}
+
+
+
+/* Content */
+.content {
+    margin-left: 50px;
+    margin-right: 80px;
+    background: #f3f7ff;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    scrollbar-width: none; 
+}
+
+/* Custom scrollbar styling */
+.content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+
+
+@media (max-width: 768px) {
+    .content {
+        margin-left: 50px; /* Adjust accordingly */
+    }
+}
+/* Titles */
+.food-order-title {
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.food-price-title {
+    color: #5f40e5;
+    font-size: 13px;
+}
+
+.menu-title {
+    font-size: 34px;
+    font-weight: bold;
+}
+
+/* Order Panel */
+.order-panel {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 420px;
+    overflow-y: auto;
+    scrollbar-width: none; 
+}
+
+/* WebKit (Chrome, Safari, Edge) scrollbar styles */
+.order-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.order-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.order-panel::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.order-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Cashier Details */
+.cashierID, .cashierName {
+    padding: 3px 10px;
+    border-radius: 7px;
+    display: inline-block;
+    text-align: start;
+    white-space: nowrap;
+    width: 387px;
+}
+
+.cashierID {
+    background-color: #5f40e5;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0px 0px 9px;
+}
+
+.cashierName {
+    background-color: #f3f7ff;
+    color: #908f8f;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+/* Food Card */
+.food-card {
+    text-align: center;
+    background: #f8f9fc;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    width: 180px;
+    height: 200px;
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+}
+
+.food-card img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.food-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.food-price {
+    font-size: 16px;
+    color: #6a5acd;
+    font-weight: bold;
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px; /* Space between cards */
+}
+
+
+/* Navigation */
+.nav-link {
+    width: 200px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #a3a3a3;
+}
+.nav-tabs .nav-link {
+    border: none !important; 
+    outline: none !important; 
+}
+
+.nav-tabs .nav-link:hover {
+    background: transparent; 
+    border: none !important;
+    box-shadow: none !important; 
+}
+
+.nav-tabs .nav-link.active {
+    background: #fdc848;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px 12px 0 0; 
+    box-shadow: 6px 4px 6px rgba(131, 131, 131, 0.1); 
+    transition: all 0.2s ease-in-out;
+    padding: 10px 20px;
+}
+
+
+
+/* Search Box */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f8f9fc;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    
+}
+
+.search-box i {
+    color: #6a5acd;
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+}
+
+.search-box input::placeholder {
+    color: #a0a0a0;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #5f40e5;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #ff585f;
+    font-size: 18px;
+    border: none;
+    width: 175px;
+    height: 40px;
+}
+
+.btn-success {
+    background-color: #00b463;
+    font-size: 18px;
+    border: none;
+    width: 175px;
+    height: 40px;
+}
+
+.btn-primary:hover, .btn-danger:hover, .btn-success:hover {
+    transform: scale(1.05); /* Slightly increases the button size */
+}
+
+/* Quantity & Price */
+.quantity-field {
+    border-radius: 5px;
+    border: 2px solid #626262;
+    text-align: center;
+    width: 60px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.food-total-price {
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+    position: relative;
+    align-items: center;
+}
+
+/* Icons */
+.bi-trash {
+    color: #ff585f;
+    font-size: 24px;
+    transform: scale(0.07); /* Slightly increases the button size */
+}
+
+.bi-pencil-square {
+    color: #fdc848;
+    font-size: 24px;
+    transform: scale(0.07); /* Slightly increases the button size */
+}
+
+.icon-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    position: relative;
+}
+
+/* Additional Containers */
+.container-date-time-name {
+    background-color: #dfe8fa;
+    color: #908f8f;
+    padding: 1px 10px;
+    border-radius: 7px;
+    display: flex;
+    font-size: 16px;
+    font-weight: normal;
+    width: 387px;
+    text-align: start;
+    white-space: nowrap;
+    align-items: center;
+    margin: 0px 0px 5px;
+}
+
+.cooking-instructions {
+    font-size: 14px;
+    color: #908f8f;
+    font-weight: normal;
+    display: block;
+    padding: 5px 0;
+}
+
+.input-box {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #dfe8fa;
+    outline: none;
+    font-size: 14px;
+    padding: 5px 0;
+    color: #908f8f;
+    background: transparent;
+}
+
+/* Discount & Subtotal */
+
+
+.Subtotal {
+    font-size: 16px;
+}
+
+.subtotalAmount {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+
+/* Payment Fields */
+.referenceNum, .gcashpay, .cashpayment, .cashchange {
+    width: 130px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.inputPaymentGcash {
+    margin-left: 43px;
+}
+
+.inputPaymentCash {
+    margin-left: 49px;
+}
+
+
+/* Modal */
+.btn-modal {
+    background-color: #ffffff; 
+    color: rgb(89, 89, 89);
+    border: 1px solid rgb(163, 163, 163);
+    padding: 5px 18px;
+    font-size: 16px;
+    font-weight: normal;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    min-width: 120px;
+    text-align: center;
+}
+
+.btn-modal:hover {
+    background-color: #a4a4a4;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-modal:active {
+    background-color: #dcdcdc;
+    transform: scale(0.98);
+}
+
+.btn-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; 
+}
