@@ -1,6 +1,7 @@
 <?php
+include "../authentication/authenticated.php";
 include '../Connection/Database.php';
-SESSION_START();
+
 
 // Get the selected category from the dropdown
 $category = isset($_GET['category']) ? $_GET['category'] : 'All Categories';

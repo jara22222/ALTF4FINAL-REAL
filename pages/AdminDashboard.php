@@ -1,4 +1,5 @@
 <?php
+include "../authentication/authenticated.php";
 include '../Connection/database.php'; // Ensure database connection is included
 
 // Initialize the $search variable
@@ -139,7 +140,7 @@ if ($stmnt) {
                     <li class="toggle-item">
                         <div class="toggle-switch" onclick="toggleDarkMode()"></div>
                     </li>
-                     <a href="../index.php">
+                     <a href="../handlers/logout_handler.php">
                         <li><i class="fas fa-sign-out-alt"></i> <span>Log out</span></li>
                     </a>
                    
@@ -196,7 +197,7 @@ if ($stmnt) {
                             <div class="row">
     <div class="col d-flex border-bottom">
         <button class="btn btn-outline-secondary border active" data-section="chart-1">Sales Trends</button>
-        <button class="btn btn-outline-secondary border" data-section="chart-2">Product Performance</button>
+       
     </div>
 </div>
 
@@ -223,26 +224,8 @@ JOIN products p on o.PID = p.PID GROUP by p.product_name;");
             <input type="text" id="orders" value='<?php echo json_encode($orders); ?>' hidden>
         </div>
 
-        <?php
-        $stmnt = $conn->query("Select sum(TotalAmount)total_sales from orders");
-        if($stmnt){     
-             $row = $stmnt->fetch_assoc(); 
-        }
-        ?>
-
-        <div class="col border">
-            <canvas id="lineChart" class="w-100"></canvas>
-            <h3 id="totalSales">Total Sales: 0</h3>
-            <input id="value" value="<?php echo $row['total_sales']?>" type="text" hidden>
-            <p>Yesterday's Sales: <span id="yesterdaySales">0</span></p>
-        </div>
-    </div>
-
-
-<!-- Set 2: Product Performance -->
-
-
-  <?php
+      
+<?php
   $stmnt = $conn->query("Select SUM(o.qty) orders,p.product_name from ordered_items o 
 JOIN products p on o.PID = p.PID GROUP by p.product_name;");
         $products=[];
@@ -255,19 +238,14 @@ JOIN products p on o.PID = p.PID GROUP by p.product_name;");
         }
         
         ?>
-
-    <div class="row mx-0 p-0 chart-section chart-2">
-    <div class="col-md-12 border d-flex justify-content-center align-items-center" 
-        >
-        <canvas id="pieChart" class="h-75 w-50"></canvas>
+        <div class="col border d-flex justify-content-center">
+           <canvas id="pieChart" class="h-100 w-100 p-5"></canvas>
         <input type="text" id="products" value='<?php echo json_encode($products); ?>' hidden>
         <input type="text" id="values" value='<?php echo json_encode($values); ?>' hidden>
+        </div>
     </div>
-</div>
 
 
-
-      
 
                     </div>
 
@@ -411,38 +389,7 @@ JOIN products p on o.PID = p.PID GROUP by p.product_name;");
     // Redirect to the new URL
     window.location.href = newUrl;
 }
-  document.addEventListener("DOMContentLoaded", function () {
-    let buttons = document.querySelectorAll("[data-section]");
-    let sections = document.querySelectorAll(".chart-section");
-
-    if (buttons.length === 0 || sections.length === 0) {
-        console.error("Buttons or sections are missing!");
-        return;
-    }
-
-    // Hide all sections initially
-    sections.forEach(section => section.classList.add("d-none"));
-
-    // Show the first section by default
-    let firstSection = document.querySelector(`.${buttons[0].getAttribute("data-section")}`);
-    if (firstSection) firstSection.classList.remove("d-none");
-
-    // Add event listeners to buttons
-    buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            // Remove active class from all buttons
-            buttons.forEach(btn => btn.classList.remove("active"));
-            this.classList.add("active");
-
-            // Hide all sections
-            sections.forEach(section => section.classList.add("d-none"));
-
-            // Show the clicked section
-            let targetSection = document.querySelector(`.${this.getAttribute("data-section")}`);
-            if (targetSection) targetSection.classList.remove("d-none");
-        });
-    });
-});
+  
 
 </script>
 

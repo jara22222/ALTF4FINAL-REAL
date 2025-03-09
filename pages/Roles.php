@@ -1,6 +1,7 @@
 <?php
+include "../authentication/authenticated.php";
 include("../Connection/database.php"); // Include the database connection 
-session_start();
+
 
 // Pagination settings
 $limit = 20;
@@ -100,7 +101,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                 <li class="toggle-item">
                     <div class="toggle-switch" onclick="toggleDarkMode()"></div>
                 </li>
-               <a href="../index.php">
+                <a href="../login.php">
                         <li><i class="fas fa-sign-out-alt"></i> <span>Log out</span></li>
                     </a>
             </ul>

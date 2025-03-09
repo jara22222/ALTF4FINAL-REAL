@@ -1,6 +1,6 @@
 <?php
+include "../authentication/authenticated.php";
 include("../Connection/database.php"); // Include the database connection
-session_start();
 
 $limit = 5; // Number of records per page
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? max(1, intval($_GET['page'])) : 1;

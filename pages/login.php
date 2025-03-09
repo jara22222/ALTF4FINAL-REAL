@@ -1,6 +1,5 @@
 <?php
-include ("authentication/authenticated.php");
-
+include "../authentication/authenticated.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +11,7 @@ include ("authentication/authenticated.php");
     <title>Blacksnow Cafe | Welcome!</title>
     <style>
         body {
-            background-image: url('designs/Images/getstarted.png');
+            background-image: url('../designs/Images/getstarted.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -85,9 +84,19 @@ include ("authentication/authenticated.php");
     <!-- Main Content -->
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="custom-card glass col-md-6 col-lg-5">
+            <div class="alert-danger">
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="alert alert-danger">
+                        <?php
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                        ?>
+                    </div>
+                <?php endif; ?>
+            </div>
             <h1 class="text-center mb-3">Log In</h1>
             <p class="text-secondary text-center mb-4">Please enter your credentials.</p>
-            <form method="POST" action="handlers/login_handler.php">
+            <form method="POST" action="../handlers/login_handler.php">
                 <!-- Username Input -->
                 <div class="mb-3">
                     <label for="username" class="form-label">Username/Email</label>
@@ -109,31 +118,6 @@ include ("authentication/authenticated.php");
                 <!-- Sign Up Link -->
                
             </form>
-        </div>
-    </div>
-
-    <!-- Registration Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="registerModalLabel">Register New Account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="login_handler.php" method="POST">
-                        <div class="mb-3">
-                            <input type="text" name="username" class="form-control" placeholder="Username" required>
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" name="password" class="form-control" placeholder="Password" required>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" name="register" class="btn btn-primary">Register</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

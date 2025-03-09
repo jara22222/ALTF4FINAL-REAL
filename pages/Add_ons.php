@@ -1,6 +1,6 @@
 <?php
+include "../authentication/authenticated.php";
 include("../Connection/database.php"); // Include the database connection
-session_start();
 
 // Pagination settings
 $limit = 5;
