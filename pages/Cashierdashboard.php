@@ -1,11 +1,9 @@
 <?php
-include 'Database/Database.php';
-include ("../../login/authentication/authenticated.php");
+include '../Connection/database.php'; // Adjusted path for database connection
+include ("../authentication/authenticated.php"); // Adjusted path for authentication
 
 $drinks = $conn->query("SELECT * FROM product_view WHERE category_name = 'Drink' AND product_qty  != 0");
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +25,7 @@ $drinks = $conn->query("SELECT * FROM product_view WHERE category_name = 'Drink'
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../DesignsCashier/stylecashierdashboard.css">
+    <link rel="stylesheet" href="../designs/stylecashierdashboard.css"> <!-- Adjusted path for CSS -->
 
     <style>
         .modal {
@@ -54,9 +52,9 @@ $drinks = $conn->query("SELECT * FROM product_view WHERE category_name = 'Drink'
 
         <!-- Icons Container -->
         <div class="iconsSidebar d-flex flex-column justify-content-center align-items-center flex-grow-1">
-            <a href="../sidebarCashier/manageproducts.php" class="manageProduct" title="Manage Products"><i
+            <a href="../pages/manageproducts.php" class="manageProduct" title="Manage Products"><i
                     class="fas fa-box"></i></a>
-            <a href="../sidebarCashier/transactionHistory.php" class="transactionHistory" title="Transaction History"><i
+            <a href="../pages/transactionHistory.php" class="transactionHistory" title="Transaction History"><i
                     class="fa-solid fa-receipt"></i></a>
             <a href="Cashierdashboard.php" class="orderList" title="Order Page"><i class="fas fa-list-ul"></i></a>
         </div>
@@ -683,7 +681,7 @@ $drinks = $conn->query("SELECT * FROM product_view WHERE category_name = 'Drink'
                     <p><strong>Cash Given:</strong> <span id="receiptCashGiven"></span></p>
                     <p><strong>Change:</strong> <span id="receiptChange"></span></p>
 
-                    <form action="cashier_handler.php" method="POST">
+                    <form action="../handlers/cashier_handler.php" method="POST">
 
                     <!-- ✅ Hidden Inputs for Backend Processing -->
                     <input type="hidden" name="cashier" id="hiddenOrderID">

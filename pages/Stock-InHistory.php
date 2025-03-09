@@ -1,5 +1,5 @@
 <?php
-include '../dashboardCashier/Database/Database.php';
+include("../Connection/database.php"); 
 session_start();
 
 // Pagination settings
@@ -56,7 +56,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../DesignsCashier/stylecashiermanageproduct.css">
+    <link rel="stylesheet" href="../designs/stylecashiermanageproduct.css">
 </head>
 
 <body>

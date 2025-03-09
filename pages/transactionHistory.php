@@ -1,6 +1,6 @@
 <?php
 // Database connection
-include '../dashboardCashier/Database/Database.php';
+include '../Connection/Database.php';
 
 session_start();
 
@@ -56,10 +56,9 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
     <!-- External JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../DesignsCashier/stylecashiermanageproduct.css">
-</head>
+    <link rel="stylesheet" href="../designs/stylecashiermanageproduct.css">
+</head>  <link rel="stylesheet" href="../designs/stylecashiermanageproduct.css">
 
 <body>
     
@@ -74,7 +73,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
             <div class="iconsSidebar d-flex flex-column justify-content-center align-items-center flex-grow-1">
                 <a href="manageproducts.php" class="manageProduct" title="Manage Products"><i class="fas fa-box"></i></a>
                 <a href="transactionHistory.php" class="transactionHistory" title="Transaction History"><i class="fa-solid fa-receipt"></i></a>
-                <a href="../dashboardCashier/Cashierdashboard.php" class="orderList" title="Order Page"><i class="fas fa-list-ul"></i></a>
+                <a href="../pages/Cashierdashboard.php" class="orderList" title="Order Page"><i class="fas fa-list-ul"></i></a>
             </div>
             <div class="profile-container text-center">
                 <img src="../Images_Cashier/girl.jpg" class="profile-img" alt="Admin">

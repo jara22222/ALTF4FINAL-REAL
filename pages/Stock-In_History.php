@@ -9,24 +9,24 @@ $offset = ($page - 1) * $limit;
 $searchQuery = "";
 
 if (!empty($_GET['search_query'])) {
-  $searchQuery = "%" . $_GET['search_query'] . "%";
-  $stmt = $conn->prepare("SELECT * FROM order_summary_view WHERE OrderID LIKE ? OR CashierName LIKE ? LIMIT ? OFFSET ?");
-  $stmt->bind_param("ssii", $searchQuery, $searchQuery, $limit, $offset);
-  $stmt->execute();
-  $result = $stmt->get_result();
+    $searchQuery = "%" . $_GET['search_query'] . "%";
+    $stmt = $conn->prepare("SELECT * FROM stock_in_history WHERE StockID LIKE ? OR product_name LIKE ? LIMIT ? OFFSET ?");
+    $stmt->bind_param("ssii", $searchQuery, $searchQuery, $limit, $offset);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-  // Count total rows
-  $stmtTotal = $conn->prepare("SELECT COUNT(*) FROM order_summary_view WHERE OrderID LIKE ? OR CashierName LIKE ?");
-  $stmtTotal->bind_param("ss", $searchQuery, $searchQuery);
-  $stmtTotal->execute();
-  $stmtTotal->bind_result($totalRows);
-  $stmtTotal->fetch();
-  $stmtTotal->close();
-} else {
-  $result = $conn->query("SELECT * FROM order_summary_view ORDER BY OrderID LIMIT $limit OFFSET $offset");
-  $totalRowsResult = $conn->query("SELECT COUNT(*) AS total FROM order_summary_view");
-  $totalRows = $totalRowsResult->fetch_assoc()['total'];
-}
+    // Count total rows
+    $stmtTotal = $conn->prepare("SELECT COUNT(*) FROM stock_in_history WHERE StockID LIKE ? OR product_name LIKE ?");
+    $stmtTotal->bind_param("ss", $searchQuery, $searchQuery);
+    $stmtTotal->execute();
+    $stmtTotal->bind_result($totalRows);
+    $stmtTotal->fetch();
+    $stmtTotal->close();
+    } else {
+    $result = $conn->query("SELECT * FROM stock_in_history ORDER BY StockID LIMIT $limit OFFSET $offset");
+    $totalRowsResult = $conn->query("SELECT COUNT(*) AS total FROM stock_in_history");
+    $totalRows = $totalRowsResult->fetch_assoc()['total'];
+    }
 
 $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
 ?>
@@ -197,7 +197,9 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                     <li class="toggle-item">
                         <div class="toggle-switch" onclick="toggleDarkMode()"></div>
                     </li>
-                    <li><i class="fas fa-sign-out-alt"></i> <span>Logout</span></li>
+                    <a href="../index.php">
+                        <li><i class="fas fa-sign-out-alt"></i> <span>Log out</span></li>
+                    </a>
                 </ul>
 
                 <div class="profile-container">
@@ -215,7 +217,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
             <div class="col p-4 content">
                 <div class="row">
                     <div class="col d-flex align-items-center justify-content-between p-0">
-                        <h3 class="mt-3 page-title">Transaction History</h3>
+                        <h3 class="mt-3 page-title">Stock-In History</h3>
                     </div>
                 </div>
 
@@ -225,7 +227,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                     <div class="col d-flex align-items-center justify-content-between p-0">
                         <!-- Search Box -->
                         <div class="search-box">
-                            <form class="d-flex align-items-center" method="GET" action="Transaction.php">
+                            <form class="d-flex align-items-center" method="GET" action="Stock-In_History.php">
 
                                 <i class="fas fa-search"></i>
 
@@ -240,7 +242,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
 
                         <!-- Right-aligned container -->
                         <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-end justify-content-end mt-3 mb-3 ">
+                            <div class="d-flex align-items-end justify-content-end mt-3 mb-3">
                                 <button id="print" class="btn btn-search ms-2 gap-2" type="submit"><i
                                         class="fa-solid fa-print "></i>Print </button>
                             </div>
@@ -248,21 +250,22 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                     </div>
                 </div>
 
-
                 <!-- PRINT ONLY -->
                 <div class="page-header-1">BLACKSNOW CAFE</div>
                 <div class="page-header-2">Emilio Jacinto St. Davao City,Philippines</div>
                 <div class="page-header-3">Stock-In History</div>
 
 
+
                 <div class="table-responsive mt-4">
+
                     <table class="table">
                         <thead class="table-header">
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">CashierName</th>
-                                <th scope="col">Total Amount</th>
-                                <th scope="col">Details</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Quantity Added</th>
+                                <th scope="col">AddedBy</th>
                                 <th scope="col">Date</th>
 
                             </tr>
@@ -271,67 +274,20 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                             <?php if ($result->num_rows > 0) : ?>
                             <?php while ($row = $result->fetch_assoc()) : ?>
                             <tr>
-                                <td><?php echo $row['OrderID']; ?></td>
-                                <td><?php echo $row['CashierName']; ?></td>
-                                <td>P&nbsp;<?php echo $row['TotalAmount']; ?></td>
+                                <td><?php echo $row['StockID']; ?></td>
+                                <td><?php echo $row['product_name']; ?></td>
+                                <td><?php echo $row['QuantityAdded']; ?></td>
 
-                                <td> <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#infoModal<?php echo $row['OrderID']; ?>">
-                                        See More&nbsp;<i class="fa-solid fa-ellipsis"></i>
-                                    </button></td>
+                                <td><?php echo $row['AddedBy']; ?></td>
 
-                                <td><?php echo $row['OrderDate']; ?></td>
+                                <td><?php echo $row['DateAdded']; ?></td>
 
 
                             </tr>
-
-                            <!-- Info Modal -->
-                            <div class="modal fade" id="infoModal<?php echo $row['OrderID']; ?>" tabindex="-1"
-                                aria-labelledby="infoModalLabel<?php echo $row['OrderID']; ?>" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="infoModalLabel<?php echo $row['OrderID']; ?>">
-                                                Transaction Details
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h5 class="mt-3 mb-4 text-center">
-                                                        <?php echo htmlspecialchars($row['CashierName']); ?></h5>
-                                                    <p><strong>Products:</strong>
-                                                        <?php echo htmlspecialchars($row['ordered_products']); ?>
-                                                    </p>
-                                                    <p><strong>Add_ons:</strong>
-                                                        <?php echo htmlspecialchars($row['ordered_addons']); ?>
-                                                    </p>
-                                                    <p><strong>AmountPaid:</strong>
-                                                        <?php echo htmlspecialchars($row['AmountPaid']); ?>
-                                                    </p>
-                                                    <p><strong>PaymentMethod:</strong>
-                                                        <?php echo htmlspecialchars($row['PaymentMethod']); ?>
-                                                    </p>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
                             <?php endwhile; ?>
                             <?php else : ?>
                             <tr>
-                                <td colspan="7">No transaction found.</td>
+                                <td colspan="7">No Stock-In found.</td>
                             </tr>
                             <?php endif; ?>
                         </tbody>
@@ -358,53 +314,50 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                         </ul>
                     </nav>
                 </div>
+            </div>
+        </div>
 
 
 
 
 
 
+        <!-- CUSTOM JS -->
+        <script>
+        function confirmUpdate() {
+            return confirm("Are you sure you want to update this category's information?");
+        }
 
+        function confirmUpdate2() {
+            return confirm("Are you sure you want to delete this category's information?");
+        }
 
-                <!-- CUSTOM JS -->
-                <script>
-                function confirmUpdate() {
-                    return confirm("Are you sure you want to update this category's information?");
-                }
+        function toggleDropdown(element, event) {
+            element.classList.toggle("active");
 
-                function confirmUpdate2() {
-                    return confirm("Are you sure you want to delete this category's information?");
-                }
+            let dropdownMenu = element.querySelector(".dropdown-menu");
+            if (dropdownMenu) {
+                dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+            }
 
-                function toggleDropdown(element, event) {
-                    element.classList.toggle("active");
+            let arrowIcon = element.querySelector(".arrow-icon");
+            if (arrowIcon) {
+                arrowIcon.classList.toggle("rotated");
+            }
+        }
 
-                    let dropdownMenu = element.querySelector(".dropdown-menu");
-                    if (dropdownMenu) {
-                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-                    }
+        // PRINT
+        const printBtn = document.getElementById('print');
+        printBtn.addEventListener('click', function() {
+            print();
+        })
+        </script>
 
-                    let arrowIcon = element.querySelector(".arrow-icon");
-                    if (arrowIcon) {
-                        arrowIcon.classList.toggle("rotated");
-                    }
-                }
-                // PRINT
-                const printBtn = document.getElementById('print');
-                printBtn.addEventListener('click', function() {
-                    print();
-                })
-                </script>
-
-
-
-
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                    crossorigin="anonymous">
-                </script>
-                <!-- Bootstrap JS (required for modals) -->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+        <!-- Bootstrap JS (required for modals) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

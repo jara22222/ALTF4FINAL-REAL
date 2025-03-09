@@ -100,7 +100,9 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                 <li class="toggle-item">
                     <div class="toggle-switch" onclick="toggleDarkMode()"></div>
                 </li>
-                <li><i class="fas fa-sign-out-alt"></i> <span>Logout</span></li>
+               <a href="../index.php">
+                        <li><i class="fas fa-sign-out-alt"></i> <span>Log out</span></li>
+                    </a>
             </ul>
 
             <div class="profile-container">

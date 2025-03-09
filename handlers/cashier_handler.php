@@ -1,5 +1,8 @@
-<?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   require 'DATABASE/DATABASE.php'; // Ensure this contains the correct DB connection
+<?php
+include '../Connection/database.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   // Ensure this contains the correct DB connection
    session_start();
    
    // ✅ Get cashier details
@@ -100,11 +103,11 @@
 
    // ✅ Redirect with success message
    $_SESSION['success'] = "Order #$orderID has been placed successfully!";
-   header("Location: Cashierdashboard.php");
+   header("Location: ../pages/Cashierdashboard.php");
    exit();
 } else {
    $_SESSION['error'] = "Invalid request.";
-   header("Location: Cashierdashboard.php");
+   header("Location: ../pages/Cashierdashboard.php");
    exit();
 }
 ?>

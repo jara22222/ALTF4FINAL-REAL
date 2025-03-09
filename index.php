@@ -1,5 +1,5 @@
 <?php
-include("authentication/authenticated.php");
+include ("authentication/authenticated.php");
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ include("authentication/authenticated.php");
     <title>Blacksnow Cafe | Welcome!</title>
     <style>
         body {
-            background-image: url('getstarted.png');
+            background-image: url('designs/Images/getstarted.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

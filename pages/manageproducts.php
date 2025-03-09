@@ -1,5 +1,5 @@
 <?php
-include '../dashboardCashier/Database/Database.php';
+include '../Connection/Database.php';
 SESSION_START();
 
 // Get the selected category from the dropdown
@@ -51,7 +51,7 @@ $products = $conn->query($query);
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../DesignsCashier/stylecashiermanageproduct.css">
+     <link rel="stylesheet" href="../designs/stylecashiermanageproduct.css">
 </head>
 
 <body>
@@ -64,7 +64,7 @@ $products = $conn->query($query);
                         Product</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="stock-InHistory.php" onclick="setActiveTab(event)">Stock-in History</a>
+                    <a class="nav-link" href="../pages/stock-InHistory.php" onclick="setActiveTab(event)">Stock-in History</a>
                 </li>
             </ul>
         </div>
@@ -79,7 +79,7 @@ $products = $conn->query($query);
                         class="fas fa-box"></i></a>
                 <a href="transactionHistory.php" class="transactionHistory" title="Transaction History"><i
                         class="fa-solid fa-receipt"></i></a>
-                <a href="../dashboardCashier/Cashierdashboard.php" class="orderList" title="Order Page"><i class="fas fa-list-ul"></i></a>
+                <a href="../pages/Cashierdashboard.php" class="orderList" title="Order Page"><i class="fas fa-list-ul"></i></a>
             </div>
             <div class="profile-container text-center">
                 <img src="../Images_Cashier/girl.jpg" class="profile-img" alt="Admin">
