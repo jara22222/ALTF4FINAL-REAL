@@ -82,21 +82,38 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                 <a href="Roles.php"><li><i class="bi bi-person-lines-fill"></i> <span>Roles</span></li></a>
                 <a href="Supplier.php"><li><i class="bi bi-building"></i> <span>Suppliers</span></li></a>
 
-                <li class="dropdown" onclick="toggleDropdown(this,event)">
-                    <i class="bi bi-view-stacked"></i>
-                    <span class="dropdown-text">Items</span>
+               <li class="dropdown" onclick="toggleDropdown(this,event)">
+                        <i class="bi bi-view-stacked"></i>
+                        <span class="dropdown-text">Items</span>
+                        <i class="fas fa-chevron-right arrow-icon"></i>
+                        <ul class="dropdown-menu text-truncate">
+                            <a class="text-truncate" href="product.php">
+                                <li>Products</li>
+                            </a>
+                            <a class="text-truncate" href="category.php">
+                                <li>Categories</li>
+                            </a>
+                            <a class="text-truncate" href="add_ons.php">
+                                <li>Add Ons</li>
+                            </a>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown" onclick="toggleDropdown(this,event)">
+                    <i class="fas fa-chart-pie"></i> <span>Reports</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
-                    <ul class="dropdown-menu">
-                        <a class="text-truncate" href="product.php"><li>Products</li></a>
-                        <a class="text-truncate" href="category.php"><li>Categories</li></a>
-                        <a class="text-truncate" href="add_ons.php"><li>Add Ons</li></a>
+                    <ul class="dropdown-menu text-truncate">
+                        <a class="text-truncate" href="Transaction.php">
+                            <li>Transaction History</li>
+                        </a>
+                        <a class="text-truncate" href="Stock-In_History.php">
+                            <li>Stock in History</li>
+                        </a>
+                        <a class="text-truncate" href="Sales_History.php">
+                            <li>Sales History</li>
+                        </a>
                     </ul>
                 </li>
-
-                <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
-                <a href="Transaction.php">  <li><i class="fas fa-wallet"></i> <span>Transactions</span></li></a>
-
-              <a href="Stock-In_History.php">  <li><i class="fas fa-wallet"></i> <span>Stock-In History</span></li></a>
             </ul>
 
             <ul class="settings-container">
@@ -104,7 +121,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                 <li class="toggle-item">
                     <div class="toggle-switch" onclick="toggleDarkMode()"></div>
                 </li>
-              <a href="../index.php">
+             <a href="../handlers/logout_handler.php">
                         <li><i class="fas fa-sign-out-alt"></i> <span>Log out</span></li>
                     </a>
             </ul>
@@ -225,6 +242,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                     <th scope="col">Category</th>
                     
                     <th scope="col">Details</th>
+                    <th scope="col">Date Added</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -239,6 +257,8 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                             data-bs-target="#infoModal<?php echo $row['CID']; ?>">
                             See More&nbsp;<i class="fa-solid fa-ellipsis"></i>
                         </button></td>
+                        <td><?php echo date('F j, Y g:i A', strtotime($row['date_added'])); ?></td>
+
                     <td>
                         <form action="../Handlers/deleteCategory_handler.php" method="POST"
                                 onsubmit="return confirmUpdate2()">

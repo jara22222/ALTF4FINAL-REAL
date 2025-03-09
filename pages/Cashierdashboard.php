@@ -68,12 +68,12 @@ $drinks = $conn->query("SELECT * FROM product_view WHERE category_name = 'Drink'
 
         <!-- Icons Container -->
         <div class="iconsSidebar d-flex flex-column justify-content-center align-items-center flex-grow-1">
-            <a href="../sidebarCashier/manageproducts.php" class="manageProduct" title="Manage Products"><i
-                    class="fas fa-box"></i></a>
-            <a href="../sidebarCashier/transactionHistory.php" class="transactionHistory" title="Transaction History"><i
-                    class="fa-solid fa-receipt"></i></a>
-            <a href="Cashierdashboard.php" class="orderList" title="Order Page"><i class="fas fa-list-ul"></i></a>
-        </div>
+                <a href="manageproducts.php" class="manageProduct" title="Manage Products"><i
+                        class="fas fa-box"></i></a>
+                <a href="transactionHistory.php" class="transactionHistory" title="Transaction History"><i
+                        class="fa-solid fa-receipt"></i></a>
+                <a href="../pages/Cashierdashboard.php" class="orderList" title="Order Page"><i class="fas fa-list-ul"></i></a>
+            </div>
 
         <!-- Profile Image-->
         <div class="profile-container text-center">
@@ -365,11 +365,11 @@ $drinks = $conn->query("SELECT * FROM product_view WHERE category_name = 'Drink'
                 <!-- Order Summary -->
                 <div class="col-md-3 order-panel p-3">
                     <div class="container p-0 gap-2 mt-3 m-0">
-                        <p class="cashierID">Cashier ID: CAS-0001-0225</p>
+                        <p class="cashierID">Cashier ID: <?php echo $_SESSION['UID'] ?></p>
                         <!--ILISAN NI SA DATABASE-->
                     </div>
                     <div class="container p-0 gap-2">
-                        <p class="cashierName">Cashier Name: Disney Princess</p>
+                        <p class="cashierName">Cashier Name: <?php echo $_SESSION['fullname'] ?></p>
                         <!--ILISAN NI SA DATABASE-->
                     </div>
                     <div class="">
@@ -731,53 +731,52 @@ $drinks = $conn->query("SELECT * FROM product_view WHERE category_name = 'Drink'
                     <h5 class="modal-title" id="receiptModalLabel">Order Receipt</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body-reciept">
-                    <p class="headermodal">Blacksnow Cafe</p>
-                    <p class="addressmodal">Emillio Jacinto St. Davao City</p>
-                    <p class="divider">---------------------------------------</p>
-                    <p class="textreciept">Order ID: <span id="receiptOrderID"></span></p>
-                    <p class="textreciept"><strong>Order Time:</strong> <span id="orderTime"></span></p>
-                    <p class="textreciept"><strong>Order Date:</strong> <span id="orderDate"></span></p>
-                    <p class="divider">---------------------------------------</p>
-                    <p class="textreciept">Payment Method: <span id="receiptPaymentMethod"></span></p>
-                    <p class="textreciept">Items Ordered:</p>
-                    <ul class="itemsorderlist" id="receiptItems"></ul>
-                    <p class="pricereciept">Subtotal: <span id="receiptSubtotal"></span></p>
-                    <p class="textreciept">Cash Given: <span id="receiptCashGiven"></span></p>
-                    <p class="pricereciept">Change: <span id="receiptChange"></span></p>
-                    <p class="textreciept">Cashier Name: <?php echo $_SESSION['username']; ?></span></p>
+               <div class="modal-body-reciept">
+    <p class="headermodal">Blacksnow Cafe</p>
+    <p class="addressmodal">Emillio Jacinto St. Davao City</p>
+    <p class="divider">---------------------------------------</p>
+    <p class="textreciept">Order ID: <span id="receiptOrderID"></span></p>
+    <p class="textreciept"><strong>Order Time:</strong> <span id="orderTime"></span></p>
+    <p class="textreciept"><strong>Order Date:</strong> <span id="orderDate"></span></p>
+    <p class="divider">---------------------------------------</p>
+    <p class="textreciept">Payment Method: <span id="receiptPaymentMethod"></span></p>
+    <p class="textreciept">Items Ordered:</p>
+    <ul class="itemsorderlist" id="receiptItems"></ul>
+    <p class="pricereciept">Subtotal: <span id="receiptSubtotal"></span></p>
+    <p class="textreciept">Cash Given: <span id="receiptCashGiven"></span></p>
+    <p class="pricereciept">Change: <span id="receiptChange"></span></p>
+    <p class="textreciept">Cashier Name: <?php echo $_SESSION['fullname']; ?></span></p>
 
+    <form action="../handlers/cashier_handler.php" method="POST">
+        <!-- ✅ Hidden Inputs for Backend Processing -->
+        <input type="hidden" name="" id="hiddenOrderID">
+        <input type="hidden" name="paymentMethod" id="hiddenPaymentMethod">
+        <input type="hidden" name="subtotal" id="hiddenSubtotal">
+        <input type="hidden" name="cashGiven" id="hiddenCashGiven">
+        <input type="hidden" name="changeAmount" id="hiddenChange">
+        <input type="hidden" name="cashier" value="<?php echo $_SESSION['fullname']; ?>">
 
-                    <form action="../   /cashier_handler.php" method="POST">
-                        <!-- ✅ Hidden Inputs for Backend Processing -->
-                        <input type="hidden" name="" id="hiddenOrderID">
-                        <input type="hidden" name="paymentMethod" id="hiddenPaymentMethod">
-                        <input type="hidden" name="subtotal" id="hiddenSubtotal">
-                        <input type="hidden" name="cashGiven" id="hiddenCashGiven">
-                        <input type="hidden" name="changeAmount" id="hiddenChange">
-                        <input type="hidden" name="cashier" value="<?php echo $_SESSION['username']; ?>">
+        <!-- ✅ Visible Inputs for Reference -->
+        <input type="hidden" name="gcashReference" id="hiddenGCashRef">
 
+        <!-- ✅ Product Information -->
+        <input type="hidden" name="products" id="hiddenProducts">
+        <input type="hidden" name="totalQty" id="hiddenQty">
+        <input type="hidden" name="size" id="size">
 
-                        <!-- ✅ Visible Inputs for Reference -->
-                        <input type="hidden" name="gcashReference" id="hiddenGCashRef">
+        <!-- ✅ Add-ons Information -->
+        <input type="hidden" name="addons" id="hiddenaddons">
+        <input type="hidden" name="totalQtyaddons" id="hiddenQtyaddons">
 
-                        <!-- ✅ Product Information -->
-                        <input type="hidden" name="products" id="hiddenProducts">
-                        <input type="hidden" name="totalQty" id="hiddenQty">
-                        <input type="hidden" name="size" id="size">
-
-                        <!-- ✅ Add-ons Information -->
-                        <input type="hidden" name="addons" id="hiddenaddons">
-                        <input type="hidden" name="totalQtyaddons" id="hiddenQtyaddons">
-
-                        <!-- ✅ Hidden Inputs for Each Ordered Item -->
-                        <div id="hiddenOrderItems"></div>
-
-                </div>
+        <!-- ✅ Hidden Inputs for Each Ordered Item -->
+        <div id="hiddenOrderItems"></div>
+   <!-- Close the form tag -->
+</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="print" type="submit" class="btn btn-primary">Save Order</button>
+                    <button type="submit" class="btn btn-primary">Save Order</button>
                     </form>
+                    <button id="print" class="btn btn-primary">Print Order</button>
 
                 </div>
             </div>

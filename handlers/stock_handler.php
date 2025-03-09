@@ -1,15 +1,15 @@
 <?php
 session_start();
-include '../dashboardCashier/Database/Database.php'; // Ensure database connection is included
+include '../Connection/database.php'; // Ensure database connection is included
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $PID = $_POST['PID'];
     $newStock = $_POST['stock'];
-    $addedBy = $_SESSION['username'] ?? 'Unknown'; // Assuming you store cashier's username in session
+    $addedBy = $_SESSION['fullname'] ?? 'Unknown'; // Assuming you store cashier's username in session
 
     if ($newStock < 0) {
         $_SESSION['error'] = "Stock quantity cannot be negative.";
-        header("Location: manageproducts.php");
+        header("Location: ../pages/manageproducts.php");
         exit();
     }
 
@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "UPDATE products SET product_qty = product_qty + ? WHERE PID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("is", $newStock, $PID);
+
+
 
     if ($stmt->execute()) {
         // Log stock-in history
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt->close();
     $conn->close();
-    header("Location: manageproducts.php");
+    header("Location: ../pages/manageproducts.php");
     exit();
 }
 ?>

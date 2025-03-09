@@ -4,7 +4,7 @@ include "../authentication/authenticated.php";
 include '../Connection/Database.php';
 
 // Pagination settings
-$limit = 5;
+$limit = 10;
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 $searchQuery = "";
@@ -145,8 +145,8 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                             See More&nbsp;<i class="fa-solid fa-ellipsis"></i>
                         </button></td>
                     
-                    <td><?php echo $row['OrderDate']; ?></td>
-
+                    
+ <td><?php echo date('F j, Y g:i A', strtotime($row['OrderDate'])); ?></td>
                     
                 </tr>
 

@@ -188,7 +188,7 @@ $products = $conn->query($query);
                                 </td>
                                 <td><?php echo $product['sprice']; ?></td>
                                 <td><?php echo $product['product_qty']; ?></td>
-                                <td><?php echo $product['date']; ?></td>
+                                <td><?php echo date('F j, Y g:i A', strtotime($product['date'])); ?></td>
                                 <td>Admin</td>
                                 <td class="btn-table">
                                     <button class="btn btn-success btn-sm btn-edit" data-bs-toggle="modal"
@@ -213,7 +213,7 @@ $products = $conn->query($query);
                                     </div>
 
                                     <div class="modal-body">
-                                        <form class="add-form" action="stock_handler.php" method="POST">
+                                        <form class="add-form" action="../handlers/stock_handler.php" method="POST">
                                             <!-- Item Name (Read-Only) -->
                                             <div class="mb-3">
                                                 <label for="itemName" class="form-label">Item Name</label>

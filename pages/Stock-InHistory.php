@@ -4,7 +4,7 @@ include("../Connection/database.php");
 
 
 // Pagination settings
-$limit = 5;
+$limit = 10;
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 $searchQuery = "";
@@ -71,7 +71,7 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
                     <a class="nav-link" href="manageproducts.php" onclick="setActiveTab(event)">Manage Product</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="manageaddons.php" onclick="setActiveTab(event)">Stock-In History</a>
+                    <a class="nav-link active" href="Stock-InHistory.php" onclick="setActiveTab(event)">Stock-In History</a>
                 </li>
             </ul>
         </div>
@@ -155,8 +155,9 @@ $totalPages = max(1, ceil($totalRows / $limit)); // Avoid division by zero
 
                     <td><?php echo $row['AddedBy']; ?></td>
                     
-                    <td><?php echo $row['DateAdded']; ?></td>
+                    <td><?php echo date('F j, Y g:i A', strtotime($row['DateAdded'])); ?></td>
 
+                        
                     
                 </tr>
 

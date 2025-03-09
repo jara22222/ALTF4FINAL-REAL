@@ -27,7 +27,7 @@ try {
         } else {
             // Invalid credentials
             $_SESSION['error'] = 'Invalid username or password';
-            header('Location: ../login.php');
+            header('Location: ../pages/login.php');
             exit;
         }
     }

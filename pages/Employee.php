@@ -3,7 +3,7 @@ include "../authentication/authenticated.php";
 include("../Connection/database.php"); // Include the database connection
 
 
-$limit = 5; // Number of records per page
+$limit = 10; // Number of records per page
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($page - 1) * $limit;
 
@@ -103,27 +103,38 @@ $totalPages = ceil($totalRecords / $limit);
                     <li><i class="bi bi-building"></i> <span>Suppliers</span></li>
                 </a>
 
-                <li class="dropdown" onclick="toggleDropdown(this,event)">
-                    <i class="bi bi-view-stacked"></i>
-                    <span class="dropdown-text">Items</span>
+                 <li class="dropdown" onclick="toggleDropdown(this,event)">
+                        <i class="bi bi-view-stacked"></i>
+                        <span class="dropdown-text">Items</span>
+                        <i class="fas fa-chevron-right arrow-icon"></i>
+                        <ul class="dropdown-menu text-truncate">
+                            <a class="text-truncate" href="product.php">
+                                <li>Products</li>
+                            </a>
+                            <a class="text-truncate" href="category.php">
+                                <li>Categories</li>
+                            </a>
+                            <a class="text-truncate" href="add_ons.php">
+                                <li>Add Ons</li>
+                            </a>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown" onclick="toggleDropdown(this,event)">
+                    <i class="fas fa-chart-pie"></i> <span>Reports</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
-                    <ul class="dropdown-menu">
-                        <a class="text-truncate" href="product.php">
-                            <li>Products</li>
+                    <ul class="dropdown-menu text-truncate">
+                        <a class="text-truncate" href="Transaction.php">
+                            <li>Transaction History</li>
                         </a>
-                        <a class="text-truncate" href="category.php">
-                            <li>Categories</li>
+                        <a class="text-truncate" href="Stock-In_History.php">
+                            <li>Stock in History</li>
                         </a>
-                        <a class="text-truncate" href="add_ons.php">
-                            <li>Add Ons</li>
+                        <a class="text-truncate" href="Sales_History.php">
+                            <li>Sales History</li>
                         </a>
                     </ul>
                 </li>
-
-                <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
-                <a href="Transaction.php">  <li><i class="fas fa-wallet"></i> <span>Transactions</span></li></a>
-
-              <a href="Stock-In_History.php">  <li><i class="fas fa-wallet"></i> <span>Stock-In History</span></li></a>
             </ul>
 
             <ul class="settings-container">
@@ -131,7 +142,7 @@ $totalPages = ceil($totalRecords / $limit);
                 <li class="toggle-item">
                     <div class="toggle-switch" onclick="toggleDarkMode()"></div>
                 </li>
-                  <a href="../login.php">
+                  <a href="../handlers/logout_handler.php">
                         <li><i class="fas fa-sign-out-alt"></i> <span>Log out</span></li>
                     </a>
             </ul>
@@ -148,7 +159,7 @@ $totalPages = ceil($totalRecords / $limit);
 
 
     <!-- Main Content -->
-    <div class="main-content px-0">
+    <div class="main-content px-5">
         <div class="content">
             <div class="container-fluid px-0 mt-3">
                 <?php if (isset($_SESSION['errors'])): ?>
@@ -219,6 +230,7 @@ $totalPages = ceil($totalRecords / $limit);
                                 <th>Fullname</th>
                                 <th>Position</th>
                                 <th>Details</th>
+                                <th>Date Added</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -239,6 +251,7 @@ $totalPages = ceil($totalRecords / $limit);
                                                 See More
                                             </button>
                                         </td>
+                                         <td><?php echo date('F j, Y g:i A', strtotime($row['date_hired'])); ?></td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center gap-2">
                                                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"

@@ -36,13 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    // Verify we have products
    if (empty($productNames[0])) {
        $_SESSION['error'] = "No products selected.";
-       header("Location: Cashierdashboard.php");
+       header("Location: ../pages/Cashierdashboard.php");
        exit();
    }
-   
+    $fullname =$_SESSION['fullname'];
    // ✅ Step 2: Insert into `orders`
    $stmt = $conn->prepare("INSERT INTO orders (CashierName, TotalAmount) VALUES (?, ?)");
-   $stmt->bind_param("sd", $cashierName, $subtotal);
+   $stmt->bind_param("sd", $fullname, $subtotal);
    $stmt->execute();
    $orderID = $stmt->insert_id;
    $stmt->close();
@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    exit();
 } else {
    $_SESSION['error'] = "Invalid request.";
-   header("Location: ../pages/Cashierdashboard.php");
+    header("Location: ../pages/Cashierdashboard.php");
    exit();
 }
 ?>

@@ -105,11 +105,11 @@ $totalPages = ceil($totalRecords / $limit);
                         <li><i class="bi bi-building"></i> <span>Suppliers</span></li>
                     </a>
 
-                    <li class="dropdown" onclick="toggleDropdown(this,event)">
+                     <li class="dropdown" onclick="toggleDropdown(this,event)">
                         <i class="bi bi-view-stacked"></i>
                         <span class="dropdown-text">Items</span>
                         <i class="fas fa-chevron-right arrow-icon"></i>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu text-truncate">
                             <a class="text-truncate" href="product.php">
                                 <li>Products</li>
                             </a>
@@ -122,10 +122,21 @@ $totalPages = ceil($totalRecords / $limit);
                         </ul>
                     </li>
 
-                    <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
-                    <a href="Transaction.php">  <li><i class="fas fa-wallet"></i> <span>Transactions</span></li></a>
-
-<a href="Stock-In_History.php">  <li><i class="fas fa-wallet"></i> <span>Stock-In History</span></li></a>
+                    <li class="dropdown" onclick="toggleDropdown(this,event)">
+                    <i class="fas fa-chart-pie"></i> <span>Reports</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                    <ul class="dropdown-menu text-truncate">
+                        <a class="text-truncate" href="Transaction.php">
+                            <li>Transaction History</li>
+                        </a>
+                        <a class="text-truncate" href="Stock-In_History.php">
+                            <li>Stock in History</li>
+                        </a>
+                        <a class="text-truncate" href="Sales_History.php">
+                            <li>Sales History</li>
+                        </a>
+                    </ul>
+                </li>
                 </ul>
 
                 <ul class="settings-container">
@@ -133,7 +144,7 @@ $totalPages = ceil($totalRecords / $limit);
                     <li class="toggle-item">
                         <div class="toggle-switch" onclick="toggleDarkMode()"></div>
                     </li>
-                    <a href="../index.php">
+                    <a href="../handlers/logout_handler.php">
                         <li><i class="fas fa-sign-out-alt"></i> <span>Log out</span></li>
                     </a>
                 </ul>
@@ -217,14 +228,14 @@ $totalPages = ceil($totalRecords / $limit);
                                                 <form id="productForm" action="../Handlers/addProduct_handler.php"
                                                     method="POST" enctype="multipart/form-data">
                                                     <div class="row">
-                                                        <div class="col-5">
+                                                        <div class="col-md-12">
                                                             <label for="product_name">Product Name:</label>
                                                             <input type="text" id="product_name" name="product_name"
                                                                 class="form-control" required>
 
                                                             <label for="CID" class="mt-3">Category:</label>
                                                             <select id="CID" name="CID" class="form-control" required>
-                                                                <option value="">Select Category</option>
+                                                                <option value="" disabled selected>Select Category</option>
                                                                 <?php
                                                                 $query = "SELECT * FROM categories";
                                                                 $result = $conn->query($query);
@@ -257,9 +268,7 @@ $totalPages = ceil($totalRecords / $limit);
                                                                 ?>
                                                             </select>
 
-                                                            <label for="date" class="mt-3">Date Added:</label>
-                                                            <input type="date" id="date" name="date"
-                                                                class="form-control" required>
+                                                           
                                                         </div>
 
                                                         <div class="col-12">
@@ -351,6 +360,7 @@ $totalPages = ceil($totalRecords / $limit);
                                 <th scope="col">Price</th>
                                 <th scope="col">Supplier</th>
                                 <th scope="col">Details</th>
+                                <th scope="col">Date Added</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -367,6 +377,8 @@ $totalPages = ceil($totalRecords / $limit);
                                                 data-bs-target="#infoModal<?php echo $row['PID']; ?>">
                                                 See More&nbsp;<i class="fa-solid fa-ellipsis"></i>
                                             </button></td>
+                                            <td><?php echo date('F j, Y g:i A', strtotime($row['date'])); ?></td>
+
                                         <td>
                                             <form action="../Handlers/deleteProduct_handler.php" method="POST"
                                                 onsubmit="return confirmUpdate2()">
@@ -442,7 +454,7 @@ $totalPages = ceil($totalRecords / $limit);
 
                                                         <div class="row">
                                                             <!-- Left Column -->
-                                                            <div class="col-md-5">
+                                                            <div class="col-md-12">
                                                                 <label for="product_name">Product Name:</label>
                                                                 <input type="text" id="product_name" name="product_name"
                                                                     class="form-control"
@@ -483,9 +495,7 @@ $totalPages = ceil($totalRecords / $limit);
                                                                     } ?>
                                                                 </select>
 
-                                                                <label for="date" class="mt-3">Date Added:</label>
-                                                                <input type="date" id="date" name="date" class="form-control"
-                                                                    value="<?php echo $row['date']; ?>" required>
+                                                               
                                                             </div>
 
                                                             <!-- Full Width -->
